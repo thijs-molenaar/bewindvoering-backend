@@ -7,6 +7,9 @@ Config.read("server.ini")
 # format example: "1999-12-31"
 DATE_FORMAT = "%Y-%m-%d"
 
+# cross domain whitelist, add frontend server here
+X_DOMAINS = ['http://localhost:8000']
+
 # TODO: set up mongo auth
 # MongoDB
 MONGO_HOST = Config.get('mongo', 'host')
