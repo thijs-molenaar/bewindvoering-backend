@@ -27,7 +27,7 @@ RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 # individual items  (defaults to read-only item access).
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 
-schema = {
+schema_people = {
     # Schema definition, based on Cerberus grammar. Check the Cerberus project
     # (https://github.com/pyeve/cerberus) for details.
     'firstname': {
@@ -69,8 +69,52 @@ people = {
     # most global settings can be overridden at resource level
     'resource_methods': ['GET', 'POST'],
 
-    'schema': schema
+    'schema': schema_people
 }
 
-# accessible resources of API
-DOMAIN = {'people': people}
+schema_transactions = {
+    # Schema definition, based on Cerberus grammar. Check the Cerberus project
+    # (https://github.com/pyeve/cerberus) for details.
+    'person': {
+        'type': 'objectid',
+        'data_relation': {
+            'resource': 'people'
+        },
+        'required': True
+    },
+    'title': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 100,
+        'required': True
+    },
+    'type': {
+        'type': 'string',
+        'minlength': 1,
+        'maxlength': 100,
+        'required': True
+    },
+    'amount': {
+        'type': 'integer',
+        'required': True
+    },
+    'date': {
+        'type': 'datetime',
+        'required': True,
+    },
+}
+
+transactions = {
+    # We choose to override global cache-control directives for this resource.
+    'cache_control': 'max-age=10,must-revalidate',
+    'cache_expires': 10,
+
+    # most global settings can be overridden at resource level
+    'resource_methods': ['GET', 'POST'],
+
+    'schema': schema_transactions
+}
+
+# DOMAIN dict explains which resources are available and how they will be accessible
+DOMAIN = {'people': people,
+          'transactions': transactions}
