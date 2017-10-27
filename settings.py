@@ -18,6 +18,9 @@ MONGO_PORT = Config.get('mongo', 'port')
 #MONGO_PASSWORD = Config.get('mongo', 'password')
 MONGO_DBNAME = Config.get('mongo', 'dbname')
 
+# uploads
+UPLOAD_FOLDER = Config.get('upload', 'folder')
+
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
 # read-only access to the endpoint).
